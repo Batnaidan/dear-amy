@@ -17,14 +17,14 @@ export default function ChoosePage() {
         </h1>
         <p className="font-quicksand text-amy-text/60 text-base md:text-lg">
           Choose whatever you like — you can redeem them when you&apos;re here
-          💜
+          🩵
         </p>
       </motion.div>
 
       <SelectionGrid />
 
       <footer className="text-center py-8 font-quicksand text-xs text-amy-text/30">
-        Made with 💜
+        Made with 🩵
       </footer>
     </main>
   )

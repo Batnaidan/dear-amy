@@ -1,15 +1,22 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useRef } from "react"
 import { motion } from "framer-motion"
 import GiftCard from "./GiftCard"
 
+interface ActionLog {
+  action: "select" | "deselect"
+  type: "gift" | "date"
+  label: string
+  time: string
+}
+
 const gifts = [
-  { id: "cranes", label: "100 Origami Cranes", emoji: "🐦" },
+  { id: "cranes", label: "X Origami Cranes", emoji: "🐦" },
   { id: "plushie", label: "Plushie", emoji: "🧸" },
   { id: "beer", label: "Altangobi Beer", emoji: "🍺" },
   { id: "flower", label: "Flower", emoji: "🌼" },
-  { id: "money", label: "100,000,000₮", emoji: "💰", isEasterEgg: true },
+  { id: "money", label: "999,000,000₮", emoji: "💰", isEasterEgg: true },
 ]
 
 const dates = [
@@ -26,6 +33,7 @@ export default function SelectionGrid() {
   const [showPetals, setShowPetals] = useState(false)
   const [stage, setStage] = useState(0) // 0=initial, 1=need 2 gifts, 2=just kidding choose all
   const [stageMessage, setStageMessage] = useState("")
+  const actionLog = useRef<ActionLog[]>([])
 
   const petals = useMemo(
     () =>
@@ -40,7 +48,24 @@ export default function SelectionGrid() {
     [],
   )
 
+  const logAction = (
+    action: "select" | "deselect",
+    type: "gift" | "date",
+    id: string,
+  ) => {
+    const items = type === "gift" ? gifts : dates
+    const label = items.find((i) => i.id === id)?.label ?? id
+    actionLog.current.push({
+      action,
+      type,
+      label,
+      time: new Date().toLocaleTimeString(),
+    })
+  }
+
   const toggleGift = (id: string) => {
+    const isSelected = selectedGifts.has(id)
+    logAction(isSelected ? "deselect" : "select", "gift", id)
     setSelectedGifts((prev) => {
       const next = new Set(prev)
       if (next.has(id)) next.delete(id)
@@ -50,6 +75,8 @@ export default function SelectionGrid() {
   }
 
   const toggleDate = (id: string) => {
+    const isSelected = selectedDates.has(id)
+    logAction(isSelected ? "deselect" : "select", "date", id)
     setSelectedDates((prev) => {
       if (prev.has(id)) return new Set()
       return new Set([id])
@@ -94,7 +121,11 @@ export default function SelectionGrid() {
       await fetch("/api/notify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ gifts: giftLabels, dates: dateLabels }),
+        body: JSON.stringify({
+          gifts: giftLabels,
+          dates: dateLabels,
+          log: actionLog.current,
+        }),
       })
 
       setIsSubmitted(true)
@@ -131,7 +162,7 @@ export default function SelectionGrid() {
           animate={{ opacity: 1, scale: 1 }}
           className="text-center px-6"
         >
-          <div className="text-6xl mb-6">🌸</div>
+          {/* <div className="text-6xl mb-6">🌸</div> */}
           <h2 className="font-caveat text-4xl md:text-5xl text-amy-deep mb-2">
             It&apos;s gonna be
           </h2>
@@ -149,16 +180,32 @@ export default function SelectionGrid() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 3, type: "spring", stiffness: 200 }}
           >
-            DARY! 👨‍💼
+            DARY! 👱🏽‍♂️
           </motion.h2>
-          <motion.p
-            className="font-quicksand text-amy-text/70 text-lg"
+          {/* <motion.p
+            className="font-quicksand text-amy-text/70 text-lg mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 4 }}
           >
-            I can&apos;t wait to make these happen when you&apos;re here 💜
-          </motion.p>
+            I can&apos;t wait to make these happen when you&apos;re here
+          </motion.p> */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 4 }}
+            className="bg-amy-card border-2 border-dashed border-amy-purple/40 rounded-lg px-6 py-4 inline-block"
+          >
+            <p className="font-quicksand text-amy-text/50 text-sm mb-1">
+              Your redeem code
+            </p>
+            <p className="font-caveat text-3xl md:text-4xl text-amy-deep tracking-wide mb-2">
+              Heisenberg
+            </p>
+            <p className="font-quicksand text-amy-text/40 text-xs">
+              Remember this code! You&apos;ll need it to redeem your gifts
+            </p>
+          </motion.div>
         </motion.div>
       </div>
     )
@@ -181,7 +228,7 @@ export default function SelectionGrid() {
         transition={{ delay: 0.2 }}
       >
         <h3 className="font-caveat text-2xl md:text-3xl text-amy-deep mb-4 text-center">
-          Pick our date 💜
+          Pick our date
         </h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-10">
           {dates.map((date) => (
