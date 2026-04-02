@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 70" width="50" height="70">
+  <!-- Paper cutout music note -->
+  <g fill="#7EC8E3" stroke="#5BA3C4" stroke-width="1.5">
+    <ellipse cx="18" cy="55" rx="12" ry="9" transform="rotate(-15 18 55)"/>
+    <rect x="28" y="12" width="4" height="45" rx="2"/>
+    <path d="M32,12 Q45,8 42,22 Q39,30 32,26" fill="#C3AED6" stroke="#8675A9"/>
+  </g>
+</svg>

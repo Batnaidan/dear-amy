@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 40" width="80" height="40">
+  <!-- Paper cutout bird -->
+  <g fill="#8675A9">
+    <!-- Body -->
+    <ellipse cx="35" cy="25" rx="18" ry="8"/>
+    <!-- Head -->
+    <circle cx="55" cy="20" r="7"/>
+    <!-- Beak -->
+    <polygon points="62,19 68,21 62,23" fill="#F7C948"/>
+    <!-- Wing -->
+    <path d="M30,25 Q20,8 38,18" fill="#C3AED6" class="wing"/>
+    <!-- Tail -->
+    <path d="M17,25 L8,18 L12,27 Z" fill="#C3AED6"/>
+  </g>
+  <!-- Eye -->
+  <circle cx="57" cy="18" r="2" fill="white"/>
+  <circle cx="57.5" cy="17.5" r="1" fill="#333"/>
+</svg>

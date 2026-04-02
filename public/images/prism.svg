@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 100" width="120" height="100">
+  <!-- Paper cutout Pink Floyd Dark Side prism -->
+  <!-- White beam entering -->
+  <line x1="0" y1="50" x2="45" y2="50" stroke="#E8E0D0" stroke-width="4"/>
+  <!-- Prism triangle -->
+  <polygon points="60,10 100,90 20,90" fill="#F5F0E8" stroke="#8675A9" stroke-width="3"/>
+  <polygon points="60,10 100,90 20,90" fill="#C3AED6" opacity="0.25"/>
+  <!-- Inner highlight -->
+  <polygon points="60,25 88,82 32,82" fill="none" stroke="#8675A9" stroke-width="1" opacity="0.4"/>
+  <!-- Rainbow beams exiting - thicker and more vivid -->
+  <line x1="78" y1="38" x2="118" y2="18" stroke="#FF4444" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="80" y1="44" x2="118" y2="32" stroke="#FF8C00" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="82" y1="50" x2="118" y2="46" stroke="#FFD700" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="80" y1="56" x2="118" y2="60" stroke="#22C55E" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="78" y1="62" x2="118" y2="74" stroke="#3B82F6" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="76" y1="68" x2="118" y2="88" stroke="#8B5CF6" stroke-width="3.5" stroke-linecap="round"/>
+</svg>
