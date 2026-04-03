@@ -66,7 +66,17 @@ export default function SelectionGrid() {
 
   const toggleGift = (id: string) => {
     const isSelected = selectedGifts.has(id)
-    logAction(isSelected ? "deselect" : "select", "gift", id)
+    if (isSelected) {
+      logAction("deselect", "gift", id)
+    } else {
+      // In stage 0, selecting a new gift implicitly deselects the previous one
+      if (stage === 0) {
+        for (const prevId of selectedGifts) {
+          logAction("deselect", "gift", prevId)
+        }
+      }
+      logAction("select", "gift", id)
+    }
     setSelectedGifts((prev) => {
       if (prev.has(id)) {
         const next = new Set(prev)
@@ -83,7 +93,15 @@ export default function SelectionGrid() {
 
   const toggleDate = (id: string) => {
     const isSelected = selectedDates.has(id)
-    logAction(isSelected ? "deselect" : "select", "date", id)
+    if (isSelected) {
+      logAction("deselect", "date", id)
+    } else {
+      // Selecting a new date implicitly deselects the previous one
+      for (const prevId of selectedDates) {
+        logAction("deselect", "date", prevId)
+      }
+      logAction("select", "date", id)
+    }
     setSelectedDates((prev) => {
       if (prev.has(id)) return new Set()
       return new Set([id])
