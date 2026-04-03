@@ -68,9 +68,15 @@ export default function SelectionGrid() {
     const isSelected = selectedGifts.has(id)
     logAction(isSelected ? "deselect" : "select", "gift", id)
     setSelectedGifts((prev) => {
+      if (prev.has(id)) {
+        const next = new Set(prev)
+        next.delete(id)
+        return next
+      }
+      // Stage 0: only allow 1 gift at a time
+      if (stage === 0) return new Set([id])
       const next = new Set(prev)
-      if (next.has(id)) next.delete(id)
-      else next.add(id)
+      next.add(id)
       return next
     })
   }
@@ -94,7 +100,7 @@ export default function SelectionGrid() {
     // Stage 0: needs at least 1 gift + 1 date, then ask for 2 gifts
     if (stage === 0) {
       setStage(1)
-      setStageMessage("You have to choose at least 2 gifts 🤔")
+      setStageMessage("Bazinga, you have to choose 2 gifts 🤔")
       return
     }
 
@@ -102,7 +108,7 @@ export default function SelectionGrid() {
     if (stage === 1) {
       if (realGiftCount < 2) return
       setStage(2)
-      setStageMessage("Just kidding... choose ALL the gifts 😈")
+      setStageMessage("Double bazinga... choose ALL the gifts 🤖")
       return
     }
 
@@ -140,7 +146,7 @@ export default function SelectionGrid() {
 
   if (isSubmitted) {
     return (
-      <div className="relative min-h-screen flex items-center justify-center">
+      <div className="relative w-full max-w-2xl mx-auto px-4 pb-12 flex items-center justify-center">
         {/* Sakura petal confetti */}
         {showPetals &&
           petals.map((p) => (
@@ -252,7 +258,7 @@ export default function SelectionGrid() {
         transition={{ delay: 0.4 }}
       >
         <h3 className="font-caveat text-2xl md:text-3xl text-amy-deep mb-4 text-center">
-          Pick 1 gift 🎁
+          Pick a gift 🎁
         </h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-10">
           {gifts.map((gift) => (
