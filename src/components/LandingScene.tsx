@@ -104,8 +104,8 @@ export default function LandingScene() {
       <FloatingElement
         text="Bazinga! 💥"
         size={50}
-        x="35%"
-        y="75%"
+        x="5%"
+        y="8%"
         delay={3.2}
         duration={8.5}
         rotate={6}
