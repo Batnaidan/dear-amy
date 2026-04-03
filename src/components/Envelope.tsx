@@ -116,7 +116,7 @@ export default function Envelope() {
               <motion.div
                 className="absolute left-2 right-2 md:left-3 md:right-3 bg-white rounded-sm border border-amy-purple/20 p-6 md:p-8"
                 style={{
-                  zIndex: letterAbove ? 7 : 1,
+                  zIndex: letterAbove ? 200 : 1,
                   filter: "drop-shadow(0 2px 8px rgba(134,117,169,0.15))",
                   bottom: "20%",
                 }}
