@@ -20,26 +20,27 @@ export default function BirthdayCake({ onComplete }: BirthdayCakeProps) {
   const analyserRef = useRef<AnalyserNode | null>(null)
   const animFrameRef = useRef<number>(0)
   const streamRef = useRef<MediaStream | null>(null)
+  const onCompleteRef = useRef(onComplete)
+  useEffect(() => {
+    onCompleteRef.current = onComplete
+  }, [onComplete])
 
-  const blowOut = useCallback(
-    (count: number) => {
-      setLitCandles((prev) => {
-        const arr = [...prev]
-        // Shuffle and pick random candles to blow out
-        for (let i = arr.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [arr[i], arr[j]] = [arr[j], arr[i]]
-        }
-        const toRemove = new Set(arr.slice(0, count))
-        const next = new Set(arr.filter((c) => !toRemove.has(c)))
-        if (next.size === 0 && toRemove.size > 0) {
-          setTimeout(onComplete, 800)
-        }
-        return next
-      })
-    },
-    [onComplete],
-  )
+  const blowOut = useCallback((count: number) => {
+    setLitCandles((prev) => {
+      const arr = [...prev]
+      // Shuffle and pick random candles to blow out
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]]
+      }
+      const toRemove = new Set(arr.slice(0, count))
+      const next = new Set(arr.filter((c) => !toRemove.has(c)))
+      if (next.size === 0 && toRemove.size > 0) {
+        setTimeout(() => onCompleteRef.current(), 800)
+      }
+      return next
+    })
+  }, [])
 
   const startMic = useCallback(async () => {
     try {
@@ -81,16 +82,14 @@ export default function BirthdayCake({ onComplete }: BirthdayCakeProps) {
   }, [blowOut])
 
   useEffect(() => {
-    if (useMic === null) {
-      startMic()
-    }
+    startMic()
     return () => {
       if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current)
       if (audioContextRef.current) audioContextRef.current.close()
       if (streamRef.current)
         streamRef.current.getTracks().forEach((t) => t.stop())
     }
-  }, [useMic, startMic])
+  }, [startMic])
 
   const handleCandleTap = (index: number) => {
     if (!useMic && litCandles.has(index)) {
