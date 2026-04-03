@@ -121,21 +121,24 @@ export default function Envelope() {
                   bottom: "20%",
                 }}
                 initial={{ y: 0, opacity: 0 }}
-                animate={{ y: -180, opacity: 1 }}
+                animate={{ y: -130, opacity: 1 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
               >
-                <h1 className="font-caveat text-3xl md:text-4xl text-amy-deep mb-2 text-center">
-                  Dear Amy 🌸
+                <h1 className="font-caveat text-2xl md:text-3xl text-amy-deep mb-2 text-center">
+                  Dear Amy 🌸,
                 </h1>
-                <p className="font-caveat text-xl md:text-xl text-amy-text/70 text-center mb-4">
-                  I made you a little something...
+                <p className="font-caveat text-lg md:text-xl text-amy-text/70 text-center mb-4">
+                  Happy birthday! Hope you have a great one. I wish I could be
+                  there to celebrate with you in person. But I made you a little
+                  something...
                 </p>
+                {/* <p className="font-caveat text-xl md:text-xl text-amy-text/70 text-center mb-4"></p> */}
                 <motion.button
                   onClick={(e) => {
                     e.stopPropagation()
                     router.push("/choose")
                   }}
-                  className="block mx-auto font-caveat text-lg md:text-xl px-6 py-2 bg-amy-deep text-white rounded-lg cursor-pointer hover:bg-amy-deep/90 transition-colors"
+                  className="block mx-auto font-caveat text-lg px-4 py-1 bg-amy-deep text-white rounded-lg cursor-pointer hover:bg-amy-deep/90 transition-colors"
                   // initial={{ opacity: 0 }}
                   // animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}

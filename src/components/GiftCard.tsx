@@ -38,7 +38,7 @@ export default function GiftCard({
     <div className="relative">
       <motion.button
         onClick={handleClick}
-        className={`relative w-full p-5 rounded-lg cursor-pointer transition-colors duration-200 ${
+        className={`relative w-full h-full p-5 rounded-lg cursor-pointer transition-colors duration-200 ${
           selected
             ? "bg-amy-purple/20 border-2 border-amy-deep shadow-lg"
             : "bg-amy-card border-2 border-amy-purple/20 hover:border-amy-purple/50"

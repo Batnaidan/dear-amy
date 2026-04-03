@@ -12,10 +12,11 @@ interface ActionLog {
 }
 
 const gifts = [
-  { id: "cranes", label: "X Origami Cranes", emoji: "🐦" },
+  { id: "cranes", label: "365 Origami Cranes", emoji: "🐦" },
   { id: "plushie", label: "Plushie", emoji: "🧸" },
   { id: "beer", label: "Altangobi Beer", emoji: "🍺" },
   { id: "flower", label: "Flower", emoji: "🌼" },
+  { id: "potion", label: "Eternal Youth Potion", emoji: "💅🧪" },
   { id: "money", label: "999,000,000₮", emoji: "💰", isEasterEgg: true },
 ]
 
@@ -251,7 +252,7 @@ export default function SelectionGrid() {
         transition={{ delay: 0.4 }}
       >
         <h3 className="font-caveat text-2xl md:text-3xl text-amy-deep mb-4 text-center">
-          Pick your gifts 🎁
+          Pick your gift 🎁
         </h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-10">
           {gifts.map((gift) => (

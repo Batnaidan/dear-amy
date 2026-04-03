@@ -13,7 +13,7 @@ export default function ChoosePage() {
         className="text-center mb-10 px-4"
       >
         <h1 className="font-caveat text-4xl md:text-5xl text-amy-deep mb-2">
-          Pick your gifts & dates, Amy 🌸
+          Pick your gift & date, Amy 🌸
         </h1>
         <p className="font-quicksand text-amy-text/60 text-base md:text-lg">
           Choose whatever you like — you can redeem them when you&apos;re here
