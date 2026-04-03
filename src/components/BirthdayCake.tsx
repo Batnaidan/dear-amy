@@ -92,12 +92,12 @@ export default function BirthdayCake({ onComplete }: BirthdayCakeProps) {
   }, [startMic])
 
   const handleCandleTap = (index: number) => {
-    if (!useMic && litCandles.has(index)) {
+    if (litCandles.has(index)) {
       const next = new Set(litCandles)
       next.delete(index)
       setLitCandles(next)
       if (next.size === 0) {
-        setTimeout(onComplete, 800)
+        setTimeout(() => onCompleteRef.current(), 800)
       }
     }
   }
@@ -132,7 +132,7 @@ export default function BirthdayCake({ onComplete }: BirthdayCakeProps) {
         {candlePositions.map((xOffset, i) => (
           <div
             key={i}
-            className={`absolute ${!useMic && litCandles.has(i) ? "cursor-pointer" : ""}`}
+            className={`absolute ${litCandles.has(i) ? "cursor-pointer" : ""}`}
             style={{
               left: `${(xOffset / 240) * 100}%`,
               bottom: 110,
@@ -237,13 +237,13 @@ export default function BirthdayCake({ onComplete }: BirthdayCakeProps) {
       <AnimatePresence>
         {showHint && litCandles.size > 0 && (
           <motion.p
-            className="font-caveat text-lg md:text-xl text-amy-deep/60 mt-4 text-center"
+            className="font-caveat text-lg md:text-xl text-amy-deep mt-4 text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
             {useMic
-              ? "Blow into your microphone to blow out the candles 🌬️"
+              ? "Blow into your microphone or tap the candles 🌬️"
               : "Tap each candle to blow it out 🌬️"}
           </motion.p>
         )}
