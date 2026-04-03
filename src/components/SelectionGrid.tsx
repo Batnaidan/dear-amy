@@ -252,7 +252,7 @@ export default function SelectionGrid() {
         transition={{ delay: 0.4 }}
       >
         <h3 className="font-caveat text-2xl md:text-3xl text-amy-deep mb-4 text-center">
-          Pick your gift 🎁
+          Pick 1 gift 🎁
         </h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-10">
           {gifts.map((gift) => (
